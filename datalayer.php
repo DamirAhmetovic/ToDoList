@@ -3,7 +3,7 @@
 	$servername = "localhost";
 	$username = "root";
 	$password = "mysql";
-	$database = "GameDag";
+	$database = "ToDoList";
 	
 	try {
 	    $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
@@ -38,4 +38,12 @@
         $query = $conn->prepare("INSERT INTO lists (list_name) VALUES (:list_name)");
         $query->bindParam(":list_name", $data['list_name']);
         $query->execute();
+    }
+
+    function GetAllLists(){
+        $conn = DBconnect();
+        $query = $conn->prepare("SELECT * FROM lists");
+        $query->execute();
+        $result = $query->fetchAll();
+        return $result;  
     }

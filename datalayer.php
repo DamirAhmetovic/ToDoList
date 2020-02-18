@@ -26,7 +26,7 @@
         return $result;
     }
 
-    function requiredForm($data) {
+    function CleanupInput($data) {
         $data = trim($data);
         $data = stripslashes($data);
         $data = htmlspecialchars($data);
@@ -46,4 +46,19 @@
         $query->execute();
         $result = $query->fetchAll();
         return $result;  
+    }
+
+    function deletetask($data){
+        $conn = DBconnect();
+        $query = $conn->prepare("DELETE FROM `tasks` WHERE `task_list_id`=". $data);
+        $query->bindParam(":list", $data);
+        $query->execute();
+        deletelists($data);
+    }
+
+    function deletelists($data){
+        $conn = DBconnect();
+        $query = $conn->prepare("DELETE FROM `lists` WHERE `list_id`=". $data);
+        $query->bindParam(":list", $data);
+        $query->execute();
     }

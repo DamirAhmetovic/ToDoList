@@ -62,3 +62,20 @@
         $query->bindParam(":list", $data);
         $query->execute();
     }
+
+    function GetAllTasks(){
+        $conn = DBconnect();
+        $query = $conn->prepare("SELECT * FROM tasks");
+        $query->execute();
+        $result = $query->fetchAll();
+        return $result;  
+    }
+
+    function addtask($data){
+        $conn = DBconnect();
+        $query = $conn->prepare("INSERT INTO tasks (task_name, task_duration, task_status) VALUES (:task_name, :task_duration, :task_status)");
+        $query->bindParam(":task_name", $data['task_name']);
+        $query->bindParam(":task_duration", $data['task_duration']);
+        $query->bindParam(":task_status", $data['task_status']);
+        $query->execute();
+    }

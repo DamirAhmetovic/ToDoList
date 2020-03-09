@@ -48,19 +48,19 @@
         return $result;  
     }
 
+    function deletelists($data){
+        $conn = DBconnect();
+        $query = $conn->prepare("DELETE FROM `lists` WHERE `list_id`=". $data);
+        $query->bindParam(":list", $data);
+        $query->execute();
+    }
+
     function deletetask($data){
         $conn = DBconnect();
         $query = $conn->prepare("DELETE FROM `tasks` WHERE `task_list_id`=". $data);
         $query->bindParam(":list", $data);
         $query->execute();
         deletelists($data);
-    }
-
-    function deletelists($data){
-        $conn = DBconnect();
-        $query = $conn->prepare("DELETE FROM `lists` WHERE `list_id`=". $data);
-        $query->bindParam(":list", $data);
-        $query->execute();
     }
 
     function GetAllTasks(){
@@ -73,7 +73,8 @@
 
     function addtask($data){
         $conn = DBconnect();
-        $query = $conn->prepare("INSERT INTO tasks (task_name, task_duration, task_status) VALUES (:task_name, :task_duration, :task_status)");
+        $query = $conn->prepare("INSERT INTO tasks (task_list_id, task_name, task_duration, task_status) VALUES (:task_list_id, :task_name, :task_duration, :task_status)");
+        $query->bindParam(":task_list_id", $data['task_list_id']);
         $query->bindParam(":task_name", $data['task_name']);
         $query->bindParam(":task_duration", $data['task_duration']);
         $query->bindParam(":task_status", $data['task_status']);

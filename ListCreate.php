@@ -60,8 +60,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <h2>create list</h2>
 </div>
 <div class="w3-row-padding w3-padding-64 w3-container">
-    <form class="w3-container" method="post" action="ListCreate.php" <?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>>
-        <label class="w3-text-red"><b>duration task</b></label>
+    <form class="w3-container" method="post" <?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>>
+        <label class="w3-text-red"><b> list name</b></label>
         <input type="text" class="w3-input w3-border w3-light-grey" name="list_name" value="<?= $_POST["list_name"] ?>">
         <span class="error"> <?php echo $list_nameErr; ?></span>
         <button type="submit" class="w3-btn w3-blue-grey">Add task</button>

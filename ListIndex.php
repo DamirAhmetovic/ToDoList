@@ -14,7 +14,11 @@ include "include/header.php";
 </form>
 <?php foreach ($lists as $list) { ?>
     <div class="list_name">
-        <h2> <?php echo $list['list_name']; ?> </h2>
+        <h2> <?php echo $list['list_name']; ?>
+            <form action="ListEdit.php?list_id=<?php echo $list['list_id']; ?>" method="post">
+                <button class="w3-button w3-red">edit</button>
+            </form>
+        </h2>
         <div class="w3-row-padding w3-padding-64 w3-container">
             <table class="w3-table-all w3-small">
                 <thead>
@@ -26,24 +30,27 @@ include "include/header.php";
                         <th>edit</th>
                         <th>delete</th>
                     </tr>
-                    <?php foreach ($tasks as $task) { ?>
+                    <?php foreach ($tasks as $task) {
+                    ?>
+
                         <tr>
                             <td><?php echo $task['task_list_id']; ?></td>
                             <td><?php echo $task['task_name']; ?></td>
                             <td><?php echo $task['task_duration']; ?></td>
                             <td><?php echo $task['task_status']; ?></td>
                             <td>
-                                <form action="ListEdit.php?list_id=" method="post">
+                                <form action="TaskEdit.php?task_id=<?php echo $task['task_id']; ?>" method="post">
                                     <button class="w3-button w3-red">+</button>
                                 </form>
                             </td>
                             <td>
-                                <form action="#?list_id=<?php echo $list['list_id']; ?>" method="post">
+                                <form action="TaskDelete.php?task_id=<?php echo $task['task_id']; ?>" method="post">
                                     <button class="w3-button w3-red">-</button>
                                 </form>
                             </td>
                         </tr>
-                    <?php } ?>
+                    <?php
+                    } ?>
             </table>
         </div>
         <form action="ListDelete.php?list_id=<?php echo $list['list_id']; ?>" method="post">

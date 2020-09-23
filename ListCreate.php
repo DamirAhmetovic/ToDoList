@@ -1,19 +1,6 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  include "datalayer.php";
-  $valid = true;
-  if (empty($_POST["list_name"])) {
-    $list_nameErr = "name is required";
-    $valid = false;
-  } else {
-    $_POST["list_name"] = CleanupInput($_POST["list_name"]);
-
-    if ($valid == true) {
-      addlist($_POST);
-      header("Location: ListIndex.php");
-    }
-  }
-}
+require "ListCreateCheckInput.php";
+include "datalayer.php";  
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -80,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <div class="w3-row-padding w3-padding-64 w3-container">
     <form class="w3-container" method="post" <?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>>
       <label class="w3-text-red"><b> list name</b></label>
-      <input type="text" class="w3-input w3-border w3-light-grey" name="list_name" value="<?= $_POST["list_name"] ?>">
+      <input type="text" class="w3-input w3-border w3-light-grey" name="list_name">
       <span class="error"> <?php echo $list_nameErr; ?></span>
       <button type="submit" class="w3-btn w3-blue-grey">Add task</button>
     </form>

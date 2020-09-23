@@ -2,41 +2,7 @@
 include "datalayer.php";
 $AllLists = GetAllLists();
 $tasks = GetSpecificTask($_GET["task_id"]);
-
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $valid = true;
-    if (empty($_POST["task_list_id"])) {
-        $task_list_idErr = "list is required";
-        $valid = false;
-    } else {
-        $_POST["task_list_id"] = CleanupInput($_POST["task_list_id"]);
-    }
-    if (empty($_POST["task_name"])) {
-        $task_nameErr = "name is required";
-        $valid = false;
-    } else {
-        $_POST["task_name"] = CleanupInput($_POST["task_name"]);
-    }
-    if (empty($_POST["task_duration"])) {
-        $task_durationErr = "duration is required";
-        $valid = false;
-    } else {
-        $_POST["task_duration"] = CleanupInput($_POST["task_duration"]);
-    }
-    if (empty($_POST["task_status"])) {
-        $task_statusErr = "status is required";
-        $valid = false;
-    } else {
-        $_POST["task_status"] = CleanupInput($_POST["task_status"]);
-    }
-    if ($valid == true) {
-        EditTask($_POST);
-        header("Location: ListIndex.php");
-    }
-}
-?>
-<?php
+require "TaskEditCheckInput.php";
 include "include/header.php";
 ?>
 
@@ -55,13 +21,11 @@ include "include/header.php";
 
         <label class="w3-text-red"><b>task</b></label>
         <input class="w3-input w3-border w3-light-grey" type="text" name="task_name" value="<?php echo $tasks["task_name"] ?>">
-        <span class="error"> <?php //echo $task_nameErr; 
-                                ?></span>
+        <span class="error"> <?php echo $task_nameErr; ?></span>
 
         <label class="w3-text-red"><b>duration task</b></label>
         <input class="w3-input w3-border w3-light-grey" type="number" name="task_duration" value="<?php echo $tasks["task_duration"] ?>">
-        <span class="error"> <?php //echo $task_durationErr; 
-                                ?></span>
+        <span class="error"> <?php //echo $task_durationErr;?></span>
 
         <select class="mdb-select md-form" name="task_status">
             <option value="to do"> to do </option>

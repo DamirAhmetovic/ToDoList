@@ -1,28 +1,13 @@
 <?php
 include "datalayer.php";
 $AllLists = GetSpecificList($_GET["list_id"]);
-
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $valid = true;
-    if (empty($_POST["list_name"])) {
-        $list_nameErr = "name is required";
-        $valid = false;
-    } else {
-        $_POST["list_name"] = CleanupInput($_POST["list_name"]);
-
-        if ($valid == true) {
-            EditList($_POST);
-            header("Location: ListIndex.php");
-        }
-    }
-}
+require "ListEditCheckInput.php";
 include "include/header.php";
 ?>
 
 <!-- First Grid -->
 <div class="w3-container w3-red">
-  <h2>Edit list</h2>
+    <h2>Edit list</h2>
 </div>
 <div class="w3-row-padding w3-padding-64 w3-container">
     <form class="w3-container" method="post" <?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>>
@@ -35,5 +20,5 @@ include "include/header.php";
 
 
 <?php
-    include "include/footer.php";
+include "include/footer.php";
 ?>

@@ -1,6 +1,6 @@
 <?php
+include "datalayer.php";
 require "ListCreateCheckInput.php";
-include "datalayer.php";  
 ?>
 <!DOCTYPE html>
 <html lang="en">

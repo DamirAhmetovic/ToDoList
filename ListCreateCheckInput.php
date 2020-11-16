@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_POST["list_name"] = CleanupInput($_POST["list_name"]);
 
         if ($valid == true) {
-            addlist($_POST);
+            AddList($_POST);
             header("Location: ListIndex.php");
         }
     }

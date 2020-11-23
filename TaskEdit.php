@@ -25,7 +25,8 @@ include "include/header.php";
 
         <label class="w3-text-red"><b>duration task</b></label>
         <input class="w3-input w3-border w3-light-grey" type="number" name="task_duration" value="<?php echo $tasks["task_duration"] ?>">
-        <span class="error"> <?php //echo $task_durationErr;?></span>
+        <span class="error"> <?php //echo $task_durationErr;
+                                ?></span>
 
         <select class="mdb-select md-form" name="task_status">
             <option value="to do"> to do </option>

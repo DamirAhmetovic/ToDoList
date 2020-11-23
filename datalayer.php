@@ -46,7 +46,6 @@ function GetAllLists()
 {
     $conn = DBconnect();
     $query = $conn->prepare("SELECT * FROM lists");
-    $query->bindParam(":list_id", $list_id);
     $query->execute();
     $result = $query->fetchAll();
     return $result;
@@ -55,7 +54,7 @@ function GetAllLists()
 function DeleteLists($data)  //<--
 {
     $conn = DBconnect();
-    $query = $conn->prepare("DELETE FROM `lists` WHERE `list_id`=" . $data);
+    $query = $conn->prepare("DELETE FROM `lists` WHERE `list_id`= :list");
     $query->bindParam(":list", $data);
     $query->execute();
 }
@@ -63,7 +62,7 @@ function DeleteLists($data)  //<--
 function DeleteTask($data)  //<--
 {
     $conn = DBconnect();
-    $query = $conn->prepare("DELETE FROM `tasks` WHERE `task_list_id`=" . $data);
+    $query = $conn->prepare("DELETE FROM `tasks` WHERE `task_list_id`= :list");
     $query->bindParam(":list", $data);
     $query->execute();
     Deletelists($data);  //<--

@@ -2,7 +2,7 @@
 include "datalayer.php";
 $data = GetAllLists($_GET["list_id"]);
 $lists = GetAllLists();
-$tasks = GetAllTasks();
+
 ?>
 
 <?php
@@ -12,7 +12,9 @@ include "include/header.php";
 <form action="TaskAdd.php?list_id=" method="post">
     <button class="w3-button w3-green">Add</button>
 </form>
-<?php foreach ($lists as $list) { ?>
+<?php foreach ($lists as $list) { 
+    $tasks = GetTasksForLists($list['list_id']);
+    ?>
     <div class="list_name">
         <h2> <?php echo $list['list_name']; ?>
             <form action="ListEdit.php?list_id=<?php echo $list['list_id']; ?>" method="post">

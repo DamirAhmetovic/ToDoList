@@ -138,3 +138,13 @@ function GetSpecificTask($data)
     $result = $query->fetch();
     return $result;
 }
+
+function GetTasksForLists($data)
+{
+    $conn = DBconnect();
+    $query = $conn->prepare("SELECT * FROM tasks WHERE task_list_id = :task_id");
+    $query->bindParam(":task_id", $data);
+    $query->execute();
+    $result = $query->fetchAll();
+    return $result;
+}
